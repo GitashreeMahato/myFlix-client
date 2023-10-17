@@ -11,6 +11,11 @@ existing server-side code (REST API and database).
 
 myflix is a web app that offers a library of movies for users to watch on various devices. User can signup, find the list of movies, select a movie for more details, add favorite movies to their favorite list and view their own profile. Users can enjoy a wide range of content across genres, personalize their viewing experience, and stream in high-definition quality.
 
+## My Role
+
+- Combined my previously created Movies API with a newly designed Frontend structure.
+- Created a website using React and Bootstrap where users can browse, search and save their favorite  Movies.
+
 ### Key Features
 
 _Main View_
@@ -48,6 +53,19 @@ _Profile View_
 
 - Select a movie to view its details.
 - Create a profile and save the data about your favorite movies.
+
+## Project Link
+
+## Live Demo <a name="live-demo"></a>
+
+- [Live Demo Link - cooming soon](https://)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+link to app's repository:
+
+- GitHub: [@gitashreemahato](https://github.com/GitashreeMahato/myFlix-client)
+- Website: 
 
 ### Tech Stack
 
