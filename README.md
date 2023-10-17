@@ -54,13 +54,13 @@ _Profile View_
 - Select a movie to view its details.
 - Create a profile and save the data about your favorite movies.
 
-### Project Link
+## Project Link
 
-## Live Demo <a name="live-demo"></a>
+### Live Demo <a name="live-demo"></a>
 
 - [Live Demo Link - cooming soon](https://)
 
- ## Repository link
+ ### Repository link
 
 - GitHub: [@gitashreemahato](https://github.com/GitashreeMahato/myFlix-client)
 - Website: 
