@@ -1,9 +1,8 @@
-
-const MovieCard = ({movie, onMovieClick}) =>{
-    
-    return ( 
-    <div onClick={() =>{
-        onMovieClick(movie);
-    }}>{movie.Title}</div>)
+const MovieCard = ({movieData, onMovieClick}) =>{
+    // const {movieData} = props;
+    // const {onBookClick} = props;
+    return ( <div onClick={() =>{
+        onMovieClick(movieData);
+    }}>{movieData.Title}</div>)
 };
 export {MovieCard};
