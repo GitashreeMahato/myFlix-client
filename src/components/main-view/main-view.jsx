@@ -69,7 +69,7 @@ import { SignupView } from "../signup-view/signup-view";
                    
                     {movies.map((movie)=>(
                          <MovieCard movie = {movie} onMovieClick ={ (newSelectedMovie)=>{
-                         <MovieCard movie = {movie} onMovieClick ={ (newSelectedMovie)=>{
+                         
                             setSelectedMovie(newSelectedMovie);
                          }} />
                     ))}
