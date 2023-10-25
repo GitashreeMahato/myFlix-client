@@ -1,5 +1,5 @@
 import "./movie-view.scss";
-import { Col, Row, Card, Button,Container } from "react-bootstrap";
+import { Col, Row, Card, Button, Container } from "react-bootstrap";
 import PropTypes from 'prop-types';
 const MovieView = ({movie, onBackClick})=>{
     return (
@@ -14,12 +14,13 @@ const MovieView = ({movie, onBackClick})=>{
                         <Col>
                         <Card.Body>
                             <Card.Title>{movie.Title}</Card.Title>
-                            <Card.Text><span className="text-title">Genre:</span>{movie.Description}</Card.Text>
-                            <Card.Text><span className="text-title">Director:</span>{movie.Directors}</Card.Text>
-                            <Card.Text><span className="text-title">Actor:</span>{movie.Actors}</Card.Text>
-                            <Card.Text><span className="text-title">Release_Date:</span>{movie.Release_Date}</Card.Text>
-                            <Card.Text><span className="text-title">Ratings:</span>{movie.Ratings}</Card.Text>
-                            <Card.Text><span className="text-title">Featured:</span>{movie.Featured}</Card.Text>
+                            <Card.Text><span className="text-title">Description:  </span>{movie.Description}</Card.Text>
+                            <Card.Text><span className="text-title">Genre:  </span>{movie.Genres}</Card.Text>
+                            <Card.Text><span className="text-title">Director: </span>{movie.Directors}</Card.Text>
+                            <Card.Text><span className="text-title">Actor: </span>{movie.Actors}</Card.Text>
+                            <Card.Text><span className="text-title">Release_Date: </span>{movie.Release_Date}</Card.Text>
+                            <Card.Text><span className="text-title">Ratings: </span>{movie.Ratings}</Card.Text>
+                            <Card.Text><span className="text-title">Featured: </span>{movie.Featured}</Card.Text>
 
                             <Button onClick={onBackClick}
             className="back-button" 

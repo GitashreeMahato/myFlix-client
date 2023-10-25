@@ -55,8 +55,8 @@ import { Col, Row, Button } from "react-bootstrap";
                       </Col>
                     
                     ): selectedMovie ?( 
-                      <Col md={8} style={{ border: "1px solid" }}>
-                    <MovieView style={{ border: "1px solid" }} movie={selectedMovie} onBackClick={()=>setSelectedMovie(null)} 
+                      <Col md={8} style={{ border: "1px solid"}}>
+                    <MovieView style={{ border: "1px solid"}} movie={selectedMovie} onBackClick={()=>setSelectedMovie(null)} 
                     />
                     </Col>
                     ):movies.length === 0 ? (
