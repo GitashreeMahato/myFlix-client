@@ -1,86 +1,85 @@
 
- import { useState , useEffect} from "react";
-//  import { useState } from "react";
+import { useState , useEffect} from "react";
  import { MovieCard } from "../movie-card/movie-card";
  import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
 import { SignupView } from "../signup-view/signup-view";
- const MainView = () => {
-          const storedUser = JSON.parse(localStorage.getItem("user"));
-          const storedToken = localStorage.getItem("token");
-          const [movies, setMovies] = useState([]);
-          const [selectedMovie, setSelectedMovie] = useState(null);
-          const [user, setUser] = useState(storedUser? storedUser:null);
-          const [token, setToken] = useState(storedToken? storedToken:null);
-          useEffect(()=>{
-            if (!token) {
-              return;
-            }
-        
-            fetch("https://user-movies-b3ba594615fa.herokuapp.com/movies", {headers:{Authorization: `Bearer ${token}`}})
-            .then((response)=> response.json())
-            .then((data)=>{
-              console.log("Movies from API :" , data);
-              const movieFromApi = data.map((movie)=>{
-                return{
-                  id: movie._id,
-                  Title: movie.Title,
-                  ImageURL: movie.imageURL,
-                  Description: movie.Description,
-                  Genres: movie._id,
-                  Directors: movie._id,
-                  Actors: movie._id,
-                  Release_date: movie.Release_date,
-                  Rating: movie.Rating,
-                  Featured: movie.Featured.toString()
+import { Col, Row, Button } from "react-bootstrap";
 
-                };
-              });
-              setMovies(movieFromApi);
-            })
-            
-          }, [token]);
-          
-          if (!user) {
-            return (
-            <>
-              <LoginView onLoggedIn={(user, token) => {
-                setUser(user);
-                setToken(token);
-              }} />
-              or
-              <SignupView />
-            </>
-            );
-          }
-        
 
-          if(selectedMovie){
-            return <MovieView movie={selectedMovie} onBackClick={()=>{setSelectedMovie(null)}} />
 
-          }
-
-          if(movies.length === 0){
-            return <div>The list is empty</div>
-          }
-            return(
-              <>
-                <div>
-                   
-                    {movies.map((movie)=>(
-                         <MovieCard movie = {movie} onMovieClick ={ (newSelectedMovie)=>{
-                         
-                            setSelectedMovie(newSelectedMovie);
-                         }} />
-                    ))}
-                </div>
-                <button onClick={() => { setUser(null); setToken(null); localStorage.clear() }} >Logout</button>
-                </>
-            )
-  };
-
+  const MainView = () => {
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+    const storedToken = localStorage.getItem("token");
+    const [movies, setMovies] = useState([]);
+    const [selectedMovie, setSelectedMovie] = useState(null);
+    const [user, setUser] = useState(storedUser? storedUser:null);
+    const [token, setToken] = useState(storedToken? storedToken:null);
+    useEffect(()=>{
+      if (!token) {
+        return;
+      }
   
-  
+      fetch("https://user-movies-b3ba594615fa.herokuapp.com/movies", {headers:{Authorization: `Bearer ${token}`}})
+      .then((response)=> response.json())
+      .then((data)=>{
+        console.log("Movies from API :" , data);
+        const movieFromApi = data.map((movie)=>{
+          return{
+            id: movie._id,
+            Title: movie.Title,
+            imageURL: movie.imageURL,
+            Description: movie.Description,
+            Genres: movie.Genres,
+            Directors: movie.Directors,
+            Actors: movie.Actors,
+            Release_Date: movie.Release_Date,
+            Ratings: movie.Ratings,
+            Featured: movie.Featured.toString()
+
+          };
+        });
+        setMovies(movieFromApi);
+      })
+      
+    }, [token]);
+    
+    return(
+              <Row className="justify-content-md-center">
+                  {!user ? (
+                    
+                    <Col md={5}>
+                      <LoginView onLoggedIn={(user) => setUser(user)} />
+                      or
+                      <SignupView />
+                      </Col>
+                    
+                    ): selectedMovie ?( 
+                      <Col md={8} style={{ border: "1px solid"}}>
+                    <MovieView style={{ border: "1px solid"}} movie={selectedMovie} onBackClick={()=>setSelectedMovie(null)} 
+                    />
+                    </Col>
+                    ):movies.length === 0 ? (
+                    <div>The list is empty</div>
+                    ): (
+                      <>
+                      {movies.map((movie)=>(
+                      
+                        <Col key={movie.id} md={3} className="mb-5">
+                                 <MovieCard movie = {movie} onMovieClick ={ (newSelectedMovie)=>{
+                                 
+                                    setSelectedMovie(newSelectedMovie);
+                                 }}
+                                 />
+                                 </Col>
+                      ))}
+                      <Button className="btn-logout col-md-1 mb-4" onClick={() => { setUser(null); setToken(null); localStorage.clear() }} >Logout</Button>
+                      </>
+                    )}
+                  </Row>
+                )
+              };
+   
   export {MainView};
 
 
@@ -89,6 +88,133 @@ import { SignupView } from "../signup-view/signup-view";
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // for my reference
+
+
+//   const MainView = () => {
+//     const storedUser = JSON.parse(localStorage.getItem("user"));
+//     const storedToken = localStorage.getItem("token");
+//     const [movies, setMovies] = useState([]);
+//     const [selectedMovie, setSelectedMovie] = useState(null);
+//     const [user, setUser] = useState(storedUser? storedUser:null);
+//     const [token, setToken] = useState(storedToken? storedToken:null);
+//     useEffect(()=>{
+//       if (!token) {
+//         return;
+//       }
+  
+//       fetch("https://user-movies-b3ba594615fa.herokuapp.com/movies", {headers:{Authorization: `Bearer ${token}`}})
+//       .then((response)=> response.json())
+//       .then((data)=>{
+//         console.log("Movies from API :" , data);
+//         const movieFromApi = data.map((movie)=>{
+//           return{
+//             id: movie._id,
+//             Title: movie.Title,
+//             ImageURL: movie.imageURL,
+//             Description: movie.Description,
+//             Genres: movie._id,
+//             Directors: movie._id,
+//             Actors: movie._id,
+//             Release_date: movie.Release_date,
+//             Rating: movie.Rating,
+//             Featured: movie.Featured.toString()
+
+//           };
+//         });
+//         setMovies(movieFromApi);
+//       })
+      
+//     }, [token]);
+    
+//     if (!user) {
+//       return (
+//       <>
+//         <LoginView onLoggedIn={(user, token) => {
+//           setUser(user);
+//           setToken(token);
+//         }} />
+//         or
+//         <SignupView />
+//       </>
+//       );
+//     }
+  
+
+//     if(selectedMovie){
+//       return <MovieView movie={selectedMovie} onBackClick={()=>{setSelectedMovie(null)}} />
+
+//     }
+
+//     if(movies.length === 0){
+//       return <div>The list is empty</div>
+//     }
+//       return(
+//         <>
+//           <div>
+             
+//               {movies.map((movie)=>(
+//                    <MovieCard movie = {movie} onMovieClick ={ (newSelectedMovie)=>{
+                   
+//                       setSelectedMovie(newSelectedMovie);
+//                    }} />
+//               ))}
+//           </div>
+//           <button onClick={() => { setUser(null); setToken(null); localStorage.clear() }} >Logout</button>
+//           </>
+//       )
+// };
 
 
 
