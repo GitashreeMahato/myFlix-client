@@ -1,10 +1,13 @@
-$primary: SeaGreen;
-$body-bg: Honeydew;
+// $primary: SeaGreen;
+// $body-bg: Honeydew;
 
+$primary: black;
+$body-bg: Black;
+$body-color: white;
 @import '~bootstrap/scss/bootstrap.scss';
 
-$color: steelblue;
+// $color: steelblue;
 
-.my-flix {
-  color: $color;
-}
+// .my-flix {
+//   color: $color;
+// }
