@@ -1,8 +1,16 @@
-.back-button {
+#back-button {
     padding: 4px 12px 4px 12px;
-    color: whitesmoke;
-    background-color: dodgerblue;
+    color: rgb(57, 196, 57);
+    background-color: rgb(235, 11, 11);
     border: none;
     border-radius: 4px;
   }
+  .movie-carousel {
+    max-height: 250px;
+	transition: 0.3s;
+  margin-right: 10px;
+  }
   
+  .movie-carousel:hover {
+    transform: scale(1.09);
+  }

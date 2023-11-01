@@ -1,0 +1,113 @@
+.font-style {
+	font-family: 'Roboto', sans-serif;
+}
+//Signup form styles
+
+#form-position {
+    position: relative;
+    bottom: 65px;
+}
+
+.signup-header {
+    position: relative;
+    bottom: 42px;
+}
+
+.link-style-signup {
+	text-decoration: none;
+	color: #ffffff;
+	font-size: 00.75em;
+    position: relative;
+    bottom: 72px;
+    margin-top: 17px;
+}
+
+
+#input-style-signup {
+	background-color: black;
+}
+
+#btn-signup-nf {
+	color:#ff0000;
+	border-color:#ff0000;
+}
+
+#btn-signup-nf:hover {
+	background-color: #ff0000;
+	color: white;
+}
+
+//box styles for signup form 
+#box-signup {
+    position: relative;
+    width: 380px;
+    height: 450px;
+    border-radius: 8px;
+    background: #1c1c1c;
+    overflow: hidden;
+	text-align: center;
+    overflow: hidden;
+    bottom: 30px;
+	
+}
+
+//box animation css
+#box-signup::before{
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 380px;
+    height: 420px;
+    // background: linear-gradient(0deg, transparent, 
+    // #ff4500, #ff4500);
+    transform-origin: bottom right;
+    animation: animate 6s linear infinite;
+}
+
+#box-signup::after{
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 380px;
+    height: 420px;
+    // background: linear-gradient(0deg, transparent, 
+    // #ff4500, #ff4500);
+    transform-origin: bottom right;
+    animation: animate 6s linear infinite;
+    animation-delay: -3s;
+}
+
+// @keyframes animate {
+//     0%{
+//         transform: rotate(0deg);
+//     }
+//     100%{
+//         transform: rotate(360deg);
+//     }
+// }
+
+//form inside box css 
+#form-signup {
+    position: absolute;
+    inset: 2px;
+    border-radius: 8px;
+    background: #28292d;
+    z-index: 10;
+    padding: 50px 40px;
+    display: flex;
+    flex-direction: column;
+	align-items: center;
+    position: relative;
+    overflow: hidden;
+  
+	
+}
+#form-signup h2 {
+    color: #ff0000;
+    font-weight: 500;
+    text-align: center;
+    letter-spacing: 0,1em;
+
+}

@@ -9,14 +9,22 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^1.6.0",
     "bootstrap": "^5.3.2",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-bootstrap": "^2.9.1",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-icons": "^4.11.0",
+    "react-router": "^6.17.0",
+    "react-router-dom": "^6.17.0",
+    "sweetalert2": "^11.7.32",
+    "web-vitals": "^3.5.0"
   },
   "devDependencies": {
-    "@parcel/transformer-sass": "^2.10.0",
+    "@parcel/packager-raw-url": "^2.10.1",
+    "@parcel/transformer-sass": "^2.10.1",
+    "@parcel/transformer-webmanifest": "^2.10.1",
     "process": "^0.11.10"
   }
 }
