@@ -1,9 +1,10 @@
 
-import './movie-view.scss';
+
 import { Col, Row, Container } from 'react-bootstrap';
 import { Link, useParams } from 'react-router-dom';
 // import ReactPlayer from 'react-player';
 import { useEffect } from 'react';
+import './movie-view.scss';
 // import Swal from 'sweetalert2';
 // import { BsBookmarkPlusFill, BsBookmarkPlus } from 'react-icons/bs';
 
@@ -20,6 +21,10 @@ export const MovieView = ({ movies }) => {
 
   //searches through the list of database if movies and grabs the id to be displayed in the url
   const movie = movies.find((movie) => movie._id === movieId);
+  console.log(movieId)
+  console.log(movie);
+  console.log(movies)
+
 
   //searches through the database of movies and filters out movies with the same genre and displays them but not the same movie
   const similarMovies = (genreName) =>
@@ -29,12 +34,12 @@ export const MovieView = ({ movies }) => {
   return (
     <>
       <Container id='container' className='p-0 m-0'>
-        <Container fluid id='movie-view-section-top'>
+        <Container fluid= 'true' id='movie-view-section-top'>
           <div id='movie-content'>
             <div className='movie-details'>
               <Row>
                 <Col className='col-md-9 p-0 d-flex margin-style'>
-                  <h1 className='title-style font-style-bold'>{movie.Title}</h1>
+                  <h1 className='title-style font-style-bold'>{movie.Title}</h1>              
                   {/* {Favorite ? (
                     <BsBookmarkPlusFill
                       className='full-bookmark move-bookmark-mv'
@@ -60,12 +65,11 @@ export const MovieView = ({ movies }) => {
               </Row>
             </div>
             <Row>
-              <Col id='col-remove' fluid className='col-xs-7 col-sm-3 col-md-3'>
+              <Col id='col-remove' fluid='true' className='col-xs-7 col-sm-3 col-md-3'>
                 <div className='col-xs-5'>
                   <img id='movie-image' src={movie.imageURL} alt='' />
                 </div>
-              </Col>
-              
+              </Col> 
             </Row>
           </div>
         </Container>
@@ -98,18 +102,7 @@ export const MovieView = ({ movies }) => {
               </span>
             </Col>
             <div className='border-top'></div>
-            {/* <Row>
-              <Col className='pt-2 pb-2'>
-                <span className='movie-styles-name font-style-bold p-1'>
-                  Writers{' '}
-                </span>
-                <span className='movie-styles-name font-style-i'>
-                  {Movie.Writers[0]} ⋆ {Movie.Writers[1]} ⋆ {Movie.Writers[2]}
-                  {Movie.Writers[3]}
-                </span>
-              </Col>
-              <div className='border-top'></div>
-            </Row> */}
+           
             <Row>
               <Col className='pt-2 pb-2'>
                 <span className='movie-styles-name font-style-bold p-1'>
