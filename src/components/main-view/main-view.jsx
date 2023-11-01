@@ -29,7 +29,7 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
     //keeps track of tokens once a user logs in and stores it in storedToken state
     const [token, setToken] = useState(storedToken? storedToken:null);
-    const [searchInput] = useState('');
+    // const [searchInput] = useState('');
 
       //updates users state by taking users actions and putting them in setUser and then updating the new information to the users state
   const updatedUser = (user) => {
@@ -148,7 +148,7 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
         (<Col className="m-4 justify-content-md-center" md={10}>
               <MovieView
                movies={movies} 
-              // key={movies._id}
+              key={movies._id}
               user={user}
               // token={token}
               // movie={movies}
@@ -174,12 +174,13 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
                     <Col>
                   <SearchView onSearch={handleSearch} />
                   </Col>
+              </Row>
 
-                    </Row>
                     <Row>
                       {movies.map((movie) =>(
                         <Col className="mb-4" key={movie._id} md={3}>
-                          <MovieCard movie={movie}  
+                          <MovieCard 
+                          movie={movie}  
                           user={user} 
                           token={token} 
                           updatedUser={updatedUser}

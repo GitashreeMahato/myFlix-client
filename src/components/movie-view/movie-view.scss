@@ -14,3 +14,51 @@
   .movie-carousel:hover {
     transform: scale(1.09);
   }
+  #container {
+    max-width: none;
+      }
+      //container for top section with gradient background
+      #movie-view-section-top {
+        width: 100vw;
+        max-width: none;
+        position: relative;
+        left: 50vw;
+        left: -50vw;
+        margin-left: 50%;
+        overflow: hidden;
+        background: radial-gradient(circle at 10% 20%, rgb(0, 0, 0) 0%, rgb(91, 90, 90) 90.2%);
+      }
+      //white container that holds the bottom movie description 
+	#movie-view-section-bottom {
+		background-color: white;
+		// height: 100%;
+		width: 100vw;
+		max-width: 100vw;
+		position: relative;
+		left: 50vw;
+		left: -50vw;
+		margin-left: 50%;
+		overflow-x: hidden;
+	}
+
+
+      //movie title style
+	.title-style {
+		font-size: 4vw;
+		padding-left: 15px;
+	}
+
+  //movie description styling
+	.movie-description {
+		color: black;
+		font-size: 1.1em;
+	}
+  //css for release date, rating
+	.movie-stats {
+		color: #BDBDBD;
+		font-size: 0.9em;
+		padding: 15px;
+		position: absolute;
+		position: relative;
+		bottom: 12px;
+	}
