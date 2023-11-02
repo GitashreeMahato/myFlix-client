@@ -29,11 +29,11 @@ export const MovieView = ({ movies }) => {
   return (
     <>
       <Container id='container' className='p-0 m-0'>
-        <Container fluid id='movie-view-section-top'>
+        <Container fluid='true' id='movie-view-section-top'>
           <div id='movie-content'>
             <div className='movie-details'>
               <Row>
-                <Col className='col-md-9 p-0 d-flex margin-style'>
+                <Col className='col-md-9 p-0 d-flex margin-style' key={movie._id}>
                   <h1 className='title-style font-style-bold'>{movie.Title}</h1>
                   {/* {Favorite ? (
                     <BsBookmarkPlusFill
@@ -60,7 +60,7 @@ export const MovieView = ({ movies }) => {
               </Row>
             </div>
             <Row>
-              <Col id='col-remove' fluid className='col-xs-7 col-sm-3 col-md-3'>
+              <Col id='col-remove' fluid='true' className='col-xs-7 col-sm-3 col-md-3'>
                 <div className='col-xs-5'>
                   <img id='movie-image' src={movie.imageURL} alt='' />
                 </div>
@@ -94,7 +94,7 @@ export const MovieView = ({ movies }) => {
                 Director{' '}
               </span>
               <span className='movie-styles-name font-style-i'>
-                {movie.Directors[0]}
+                {movie.Directors[0].name}
               </span>
             </Col>
             <div className='border-top'></div>
@@ -116,8 +116,7 @@ export const MovieView = ({ movies }) => {
                   Stars{' '}
                 </span>
                 <span className='movie-styles-name font-style-i'>
-                  {movie.Actors[0]} · {movie.Actors[1]} · {movie.Actors[2]}
-                  {movie.Actors[3]}
+                  {movie.Actors[0].name} · {movie.Actors[1].name} · {movie.Actors[2].name} · {movie.Actors[3].name} · {movie.Actors[4].name} 
                 </span>
               </Col>
               <div className='border-top'></div>
@@ -128,7 +127,7 @@ export const MovieView = ({ movies }) => {
                   Genres{' '}
                 </span>
                 <span className='movie-styles-name font-style-i'>
-                  {movie.Genres[0]} · {movie.Genres[1]} · {movie.Genres[2]}
+                  {movie.Genres[0].name} · {movie.Genres[1].name} · {movie.Genres[2].name} · {movie.Genres[3].name}
                 </span>
               </Col>
               <div className='border-top pb-3'></div>
