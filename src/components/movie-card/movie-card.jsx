@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import { Button, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { BsBookmarkPlusFill, BsBookmarkPlus } from 'react-icons/bs';
 import './movie-card.scss';
 
  const MovieCard = ({ movie, user, token, updatedUser }) => {
@@ -75,20 +76,36 @@ import './movie-card.scss';
       <Card.Img variant="top" src={movie.imageURL} />
       <Card.Body>
         <Card.Title>{movie.Title}</Card.Title>
-        <Card.Text>{movie.Description}</Card.Text>
+        {/* <Card.Text>{movie.Description}</Card.Text> */}
         <Link to={`/movies/${encodeURIComponent(movie._id)}`}>
-        <Button className="close-open-btn">See more</Button>
+        <Button className="close-open-btn" variant="light">See more</Button>
         </Link>
-        <Card.Body className="favorite-btns">
+        <span>
+        {isFavorite ? (
+              <BsBookmarkPlusFill
+                className='full-bookmark move-bookmark'
+                color='#ff6b81'
+                size={40}
+                onClick={removeFavoriteMovie} 
+              />
+            ) : (
+              <BsBookmarkPlus
+                className='outline-bookmark move-bookmark'
+                size={40}
+                onClick={addFavoriteMovie}
+              />
+            )}
+          </span>
+        {/* <Card.Body className="favorite-btns">
         {!isFavorite ? (
           <Button className="fav-btn" onClick={addFavoriteMovie}>+</Button>
         ) : (
           <Button className="fav-btn" onClick={removeFavoriteMovie}>-</Button>
-        )}
+        )} */}
         {/* <Link id='link-style' to={`/movies/${movie._id}`}>
             <img className='movie-poster' src={movie.imageURL} alt='' />
           </Link> */}
-      </Card.Body>
+      {/* </Card.Body> */}
 
       </Card.Body>
     </Card>
