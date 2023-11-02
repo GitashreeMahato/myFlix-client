@@ -63,14 +63,14 @@ export const ProfileView = ({ user, token, loggedOut }) => {
             </Col>
 
             
-            <Col>
+            {/* <Col> */}
             <Link to={`/users/updateUser`} className='user-edit'>
               <FaUserEdit size={50} />
             </Link>
             <Link to={`/users/updateUser`} className='user-edit'>
               <span className='edit-user font-style'>Manage Profile</span>
             </Link>
-            </Col>
+            {/* </Col> */}
             <Button
               className='delete-btn font-style'
               variant='btn btn-danger'
