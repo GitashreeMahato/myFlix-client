@@ -12,6 +12,7 @@ import { UpdateUser } from "../profile-view/update-user";
 import { Col, Row, Container} from "react-bootstrap";
 import navLogo from "../images/logo-no-background.svg"
 import { SearchView } from "../search-view/search-view";
+import { GenreView } from "../genre-view/genre-view";
 
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
@@ -45,18 +46,26 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 		setMovies(filteredMovies);
 	};
      //logic to search movies by genre
-  const thrillerSearch = movies.filter((movie) => movie.Genres.name === 'Thriller');
-  const actionSearch = movies.filter((movie) => movie.Genres.name === 'Action');
-  const romanceSearch = movies.filter((movie) => movie.Genres.name === 'Romance');
-  const scifiSearch = movies.filter((movie) => movie.Genres.name === 'Science Fiction');
-  const dramaSearch = movies.filter((movie) => movie.Genres.name === 'Drama');
-  const horrorSearch = movies.filter((movie) => movie.Genres.name === 'Horror');
-  const historySearch = movies.filter((movie) => movie.Genres.name === 'History');
-  const fantasySearch = movies.filter((movie) => movie.Genres.name === 'Fantasy');
-  const mysterySearch = movies.filter((movie) => movie.Genres.name === 'Mystery');
-  const adventureSearch = movies.filter((movie) => movie.Genres.name === 'Adventure');
-  const crimeSearch = movies.filter((movie) => movie.Genres.name === 'Crime');
-  const comedySearch = movies.filter((movie) => movie.Genres.name === 'Comedy');
+const searchByGenre = (movieList, genreName)=>{
+  return movieList.filter((movie) =>
+  movie.Genres.name.includes(genreName)
+);
+console.log(movieList);
+
+}
+
+  // const thrillerSearch = movies.filter((movie) => movie.Genres.name === 'Thriller');
+  // const actionSearch = movies.filter((movie) => movie.Genres.name === 'Action');
+  // const romanceSearch = movies.filter((movie) => movie.Genres.name === 'Romance');
+  // const scifiSearch = movies.filter((movie) => movie.Genres.name === 'Science Fiction');
+  // const dramaSearch = movies.filter((movie) => movie.Genres.name === 'Drama');
+  // const horrorSearch = movies.filter((movie) => movie.Genres.name === 'Horror');
+  // const historySearch = movies.filter((movie) => movie.Genres.name === 'History');
+  // const fantasySearch = movies.filter((movie) => movie.Genres.name === 'Fantasy');
+  // const mysterySearch = movies.filter((movie) => movie.Genres.name === 'Mystery');
+  // const adventureSearch = movies.filter((movie) => movie.Genres.name === 'Adventure');
+  // const crimeSearch = movies.filter((movie) => movie.Genres.name === 'Crime');
+  // const comedySearch = movies.filter((movie) => movie.Genres.name === 'Comedy');
   
 
    //checks to see if user has token if not they it should'nt return main-view
@@ -249,7 +258,7 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
               }
             />
 
-<Route
+        <Route
               path='/myList/favorites'
               element={
                 <>
@@ -266,403 +275,6 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
                           updatedUser={updatedUser}
                         />
 
-
-            <Route
-              path='/movies/Thriller'
-              element={
-                <>
-                  {!user ? (
-                    <Navigate to='/login' replace />
-                  ) : movies.length === 0 ? (
-                    <Col>The list is empty</Col>
-                  ) : (
-                    <>
-                      {/* <Col>
-                        <MovieCarousel movie={movies} />
-                      </Col> */}
-                      <h2 className='movie-featured-heading mt-2 font-style-bold'>
-                      Thriller Movies
-                      </h2>
-                      {thrillerSearch.map((movie) => (
-                        <Col sm={3} className='mb-4' key={movie._id}>
-                          <MovieCard
-                            movie={movie}
-                            key={movie._id}
-                            updatedUser={updatedUser}
-                            user={user}
-                            token={token}
-                          />
-                        </Col>
-                      ))}
-                    </>
-                  )}
-                </>
-              }
-            />
-            <Route
-              path='/movies/Action'
-              element={
-                <>
-                  {!user ? (
-                    <Navigate to='/login' replace />
-                  ) : movies.length === 0 ? (
-                    <Col>The list is empty</Col>
-                  ) : (
-                    <>
-                      {/* <Col>
-                        <MovieCarousel movie={movies} />
-                      </Col> */}
-                      <h2 className='movie-featured-heading mt-2 font-style-bold'>
-                        Action Movies
-                      </h2>
-                      {actionSearch.map((movie) => (
-                        <Col sm={3} className='mb-4' key={movie._id}>
-                          <MovieCard
-                            movie={movie}
-                            key={movie._id}
-                            updatedUser={updatedUser}
-                            user={user}
-                            token={token}
-                          />
-                        </Col>
-                      ))}
-                    </>
-                  )}
-                </>
-              }
-            />
-
-            <Route
-              path='/movies/Romance'
-              element={
-                <>
-                  {!user ? (
-                    <Navigate to='/login' replace />
-                  ) : movies.length === 0 ? (
-                    <Col>The list is empty</Col>
-                  ) : (
-                    <>
-                      {/* <Col>
-                        <MovieCarousel movie={movies} />
-                      </Col> */}
-                      <h2 className='movie-featured-heading mt-2 font-style-bold'>
-                      Romance Movies
-                      </h2>
-                      {romanceSearch.map((movie) => (
-                        <Col sm={3} className='mb-4' key={movie._id}>
-                          <MovieCard
-                            movie={movie}
-                            key={movie._id}
-                            updatedUser={updatedUser}
-                            user={user}
-                            token={token}
-                          />
-                        </Col>
-                      ))}
-                    </>
-                  )}
-                </>
-              }
-            />
-
-            <Route
-              path='/movies/Science-Fiction'
-              element={
-                <>
-                  {!user ? (
-                    <Navigate to='/login' replace />
-                  ) : movies.length === 0 ? (
-                    <Col>The list is empty</Col>
-                  ) : (
-                    <>
-                      {/* <Col>
-                        <MovieCarousel movie={movies} />
-                      </Col> */}
-                      <h2 className='movie-featured-heading mt-2 font-style-bold'>
-                      Science-Fiction Movies
-                      </h2>
-                      {scifiSearch.map((movie) => (
-                        <Col sm={3} className='mb-4' key={movie._id}>
-                          <MovieCard
-                            movie={movie}
-                            key={movie._id}
-                            updatedUser={updatedUser}
-                            user={user}
-                            token={token}
-                          />
-                        </Col>
-                      ))}
-                    </>
-                  )}
-                </>
-              }
-            />
-
-            <Route
-              path='/movies/Drama'
-              element={
-                <>
-                  {!user ? (
-                    <Navigate to='/login' replace />
-                  ) : movies.length === 0 ? (
-                    <Col>The list is empty</Col>
-                  ) : (
-                    <>
-                      {/* <Col>
-                        <MovieCarousel movie={movies} />
-                      </Col> */}
-                      <h2 className='movie-featured-heading mt-2 font-style-bold'>
-                      Drama Movies
-                      </h2>
-                      {dramaSearch.map((movie) => (
-                        <Col sm={3} className='mb-4' key={movie._id}>
-                          <MovieCard
-                            movie={movie}
-                            key={movie._id}
-                            updatedUser={updatedUser}
-                            user={user}
-                            token={token}
-                          />
-                        </Col>
-                      ))}
-                    </>
-                  )}
-                </>
-              }
-            />
-
-            <Route
-              path='/movies/Horror'
-              element={
-                <>
-                  {!user ? (
-                    <Navigate to='/login' replace />
-                  ) : movies.length === 0 ? (
-                    <Col>The list is empty</Col>
-                  ) : (
-                    <>
-                      {/* <Col>
-                        <MovieCarousel movie={movies} />
-                      </Col> */}
-                      <h2 className='movie-featured-heading mt-2 font-style-bold'>
-                      Horror Movies
-                      </h2>
-                      {horrorSearch.map((movie) => (
-                        <Col sm={3} className='mb-4' key={movie._id}>
-                          <MovieCard
-                            movie={movie}
-                            key={movie._id}
-                            updatedUser={updatedUser}
-                            user={user}
-                            token={token}
-                          />
-                        </Col>
-                      ))}
-                    </>
-                  )}
-                </>
-              }
-            /> 
-
-            <Route
-              path='/movies/History'
-              element={
-                <>
-                  {!user ? (
-                    <Navigate to='/login' replace />
-                  ) : movies.length === 0 ? (
-                    <Col>The list is empty</Col>
-                  ) : (
-                    <>
-                      {/* <Col>
-                        <MovieCarousel movie={movies} />
-                      </Col> */}
-                      <h2 className='movie-featured-heading mt-2 font-style-bold'>
-                      History Movies
-                      </h2>
-                      {historySearch.map((movie) => (
-                        <Col sm={3} className='mb-4' key={movie._id}>
-                          <MovieCard
-                            movie={movie}
-                            key={movie._id}
-                            updatedUser={updatedUser}
-                            user={user}
-                            token={token}
-                          />
-                        </Col>
-                      ))}
-                    </>
-                  )}
-                </>
-              }
-            />
-
-            <Route
-              path='/movies/Fantasy'
-              element={
-                <>
-                  {!user ? (
-                    <Navigate to='/login' replace />
-                  ) : movies.length === 0 ? (
-                    <Col>The list is empty</Col>
-                  ) : (
-                    <>
-                      {/* <Col>
-                        <MovieCarousel movie={movies} />
-                      </Col> */}
-                      <h2 className='movie-featured-heading mt-2 font-style-bold'>
-                      Fantasy Movies
-                      </h2>
-                      {fantasySearch.map((movie) => (
-                        <Col sm={3} className='mb-4' key={movie._id}>
-                          <MovieCard
-                            movie={movie}
-                            key={movie._id}
-                            updatedUser={updatedUser}
-                            user={user}
-                            token={token}
-                          />
-                        </Col>
-                      ))}
-                    </>
-                  )}
-                </>
-              }
-            />
-
-            <Route
-              path='/movies/Mystery'
-              element={
-                <>
-                  {!user ? (
-                    <Navigate to='/login' replace />
-                  ) : movies.length === 0 ? (
-                    <Col>The list is empty</Col>
-                  ) : (
-                    <>
-                      {/* <Col>
-                        <MovieCarousel movie={movies} />
-                      </Col> */}
-                      <h2 className='movie-featured-heading mt-2 font-style-bold'>
-                      Mystery Movies
-                      </h2>
-                      {mysterySearch.map((movie) => (
-                        <Col sm={3} className='mb-4' key={movie._id}>
-                          <MovieCard
-                            movie={movie}
-                            key={movie._id}
-                            updatedUser={updatedUser}
-                            user={user}
-                            token={token}
-                          />
-                        </Col>
-                      ))}
-                    </>
-                  )}
-                </>
-              }
-            />
-
-            <Route
-              path='/movies/Adventure'
-              element={
-                <>
-                  {!user ? (
-                    <Navigate to='/login' replace />
-                  ) : movies.length === 0 ? (
-                    <Col>The list is empty</Col>
-                  ) : (
-                    <>
-                      {/* <Col>
-                        <MovieCarousel movie={movies} />
-                      </Col> */}
-                      <h2 className='movie-featured-heading mt-2 font-style-bold'>
-                      Adventure Movies
-                      </h2>
-                      {adventureSearch.map((movie) => (
-                        <Col sm={3} className='mb-4' key={movie._id}>
-                          <MovieCard
-                            movie={movie}
-                            key={movie._id}
-                            updatedUser={updatedUser}
-                            user={user}
-                            token={token}
-                          />
-                        </Col>
-                      ))}
-                    </>
-                  )}
-                </>
-              }
-            />
-
-            <Route
-              path='/movies/Crime'
-              element={
-                <>
-                  {!user ? (
-                    <Navigate to='/login' replace />
-                  ) : movies.length === 0 ? (
-                    <Col>The list is empty</Col>
-                  ) : (
-                    <>
-                      {/* <Col>
-                        <MovieCarousel movie={movies} />
-                      </Col> */}
-                      <h2 className='movie-featured-heading mt-2 font-style-bold'>
-                      Crime Movies
-                      </h2>
-                      {crimeSearch.map((movie) => (
-                        <Col sm={3} className='mb-4' key={movie._id}>
-                          <MovieCard
-                            movie={movie}
-                            key={movie._id}
-                            updatedUser={updatedUser}
-                            user={user}
-                            token={token}
-                          />
-                        </Col>
-                      ))}
-                    </>
-                  )}
-                </>
-              }
-            />
-
-
-<Route
-              path='/movies/Comedy'
-              element={
-                <>
-                  {!user ? (
-                    <Navigate to='/login' replace />
-                  ) : movies.length === 0 ? (
-                    <Col>The list is empty</Col>
-                  ) : (
-                    <>
-                      {/* <Col>
-                        <MovieCarousel movie={movies} />
-                      </Col> */}
-                      <h2 className='movie-featured-heading mt-2 font-style-bold'>
-                        Comedy Movies
-                      </h2>
-                      {comedySearch.map((movie) => (
-                        <Col sm={3} className='mb-4' key={movie._id}>
-                          <MovieCard
-                            movie={movie}
-                            key={movie._id}
-                            updatedUser={updatedUser}
-                            user={user}
-                            token={token}
-                          />
-                        </Col>
-                      ))}
-                    </>
-                  )}
-                </>
-              }
-            />
-             
                       </Col>
                     </Row>
                   ) : (
@@ -670,6 +282,24 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
                   )}
                 </>
               }
+            />
+
+            <Route
+            path="/movies/genre/:genreName"
+            element= {
+              <>
+              {user ? (
+               <GenreView
+               movies={movies}
+               searchByGenre= {searchByGenre}
+ 
+               />
+                  ) : (
+                    <Navigate to='/login' replace />
+                  )}
+             
+              </>
+            }
             />
 
         </Routes>
