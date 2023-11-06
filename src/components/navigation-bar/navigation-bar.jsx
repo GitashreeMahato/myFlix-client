@@ -44,7 +44,7 @@ const NavigationBar = ({user, setUser, setToken}) => {
            </NavDropdown>
               {/* <Nav.Link href="#action2" id=''>Browse by Genre</Nav.Link> */}
               <NavDropdown title="Browse by Genre" id="nav-dropdown-dark-example drop-styles" menuVariant='dark'>
-              <NavDropdown.Item href="/movies/Thriller">Thriller</NavDropdown.Item>
+              <NavDropdown.Item href="/movies/genre/Thriller">Thriller</NavDropdown.Item>
               <NavDropdown.Item href="/movies/Action">Action</NavDropdown.Item>
               <NavDropdown.Item href="/movies/Romance">Romance</NavDropdown.Item>
               <NavDropdown.Item href="/movies/Science-Fiction">Science-Fiction</NavDropdown.Item>
