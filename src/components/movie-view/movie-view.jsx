@@ -22,9 +22,14 @@ export const MovieView = ({ movies }) => {
   const movie = movies.find((movie) => movie._id === movieId);
 
   //searches through the database of movies and filters out movies with the same genre and displays them but not the same movie
-  const similarMovies = (genreName) =>
-    movies.filter((m) => m.Genres.name == genreName && m._id !== movieId);
+  // const similarMovies = (genreName) =>
+  //   movies.filter((m) => m.Genres.name == genreName && m._id !== movieId);
+      // const similarMovies = movies.filter((m)=> m.Genres[0].name === movie.Genres[0].name && m._id !== movieId)
 
+  const similarMovies = movies.filter((m) => {
+    // Check if any of the genres of the current movie match the genre of the selected movie
+    return m.Genres.some((genre) => genre.name === movie.Genres[0].name) && m._id !== movieId;
+  });
 
   return (
     <>
@@ -98,25 +103,20 @@ export const MovieView = ({ movies }) => {
               </span>
             </Col>
             <div className='border-top'></div>
-            {/* <Row>
-              <Col className='pt-2 pb-2'>
-                <span className='movie-styles-name font-style-bold p-1'>
-                  Writers{' '}
-                </span>
-                <span className='movie-styles-name font-style-i'>
-                  {Movie.Writers[0]} ⋆ {Movie.Writers[1]} ⋆ {Movie.Writers[2]}
-                  {Movie.Writers[3]}
-                </span>
-              </Col>
-              <div className='border-top'></div>
-            </Row> */}
+            
             <Row>
               <Col className='pt-2 pb-2'>
                 <span className='movie-styles-name font-style-bold p-1'>
                   Stars{' '}
                 </span>
                 <span className='movie-styles-name font-style-i'>
-                  {movie.Actors[0].name} · {movie.Actors[1].name} · {movie.Actors[2].name} · {movie.Actors[3].name} · {movie.Actors[4].name} 
+                {movie.Actors.length > 0 ? movie.Actors[0].name : ''}
+                {movie.Actors.length > 1 ? ` · ${movie.Actors[1].name}` : ''}
+                {movie.Actors.length > 2 ? ` · ${movie.Actors[2].name}` : ''}
+                {movie.Actors.length > 3 ? ` · ${movie.Actors[3].name}` : ''}
+                {movie.Actors.length > 4 ? ` · ${movie.Actors[4].name}` : ''}
+
+                  {/* {movie.Actors[0].name} · {movie.Actors[1].name} · {movie.Actors[2].name} · {movie.Actors[3].name} · {movie.Actors[4].name}  */}
                 </span>
               </Col>
               <div className='border-top'></div>
@@ -127,23 +127,18 @@ export const MovieView = ({ movies }) => {
                   Genres{' '}
                 </span>
                 <span className='movie-styles-name font-style-i'>
-                  {movie.Genres[0].name} · {movie.Genres[1].name} · {movie.Genres[2].name} · {movie.Genres[3].name}
+
+                {movie.Genres.length > 0 ? movie.Genres[0].name : ''}
+                {movie.Genres.length > 1 ? ` · ${movie.Genres[1].name}` : ''}
+                {movie.Genres.length > 2 ? ` · ${movie.Genres[2].name}` : ''}
+                {movie.Genres.length > 3 ? ` · ${movie.Genres[3].name}` : ''}
+                  
+                  {/* {movie.Genres[0].name} · {movie.Genres[1].name} · {movie.Genres[2].name} · {movie.Genres[3].name} */}
                 </span>
               </Col>
               <div className='border-top pb-3'></div>
             </Row>
-            {/* <Row>
-              <Col className='pb-4'>
-                <a href={Movie.MovieWatch} target='blank'>
-                  <Button
-                    className='watch-button'
-                    variant='btn btn-success mt-'
-                  >
-                    Watch Now
-                  </Button>
-                </a>
-              </Col>
-            </Row> */}
+            
             <Row>
               <Col>
                 <h2 className='movie-description-heading mt-1 font-style-bold pb-2'>
@@ -152,18 +147,22 @@ export const MovieView = ({ movies }) => {
               </Col>
             </Row>
             <div className='row-posters'>
-              {similarMovies(movie.Genres.name).map((movie) => (
+              {/* {similarMovies(movie.Genres.name).map((movie) => ( */}
+              {similarMovies.map((similarMovie)=>(
                 <Link
                   onClick={() => {
                     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
                   }}
                   id='link-style'
-                  to={`/movies/${movie._id}`}
+                  // to={`/movies/${movie._id}`}
+                  to = {`/movies/${similarMovie._id}`}
+                  key={similarMovie._id}
                 >
                   <img
                     className='movie-carousel'
-                    src={movie.imageURL}
-                    alt=''
+                    // src={movie.imageURL}
+                    src={similarMovie.imageURL}
+                    alt={similarMovie.Title}
                   />
                 </Link>
               ))}
@@ -246,6 +245,34 @@ export const MovieView = ({ movies }) => {
 
 
 // ============================================ For my Reference =======================================
+
+{/* <Row>
+              <Col className='pb-4'>
+                <a href={Movie.MovieWatch} target='blank'>
+                  <Button
+                    className='watch-button'
+                    variant='btn btn-success mt-'
+                  >
+                    Watch Now
+                  </Button>
+                </a>
+              </Col>
+            </Row> */}
+// -----------------------------
+{/* <Row>
+              <Col className='pt-2 pb-2'>
+                <span className='movie-styles-name font-style-bold p-1'>
+                  Writers{' '}
+                </span>
+                <span className='movie-styles-name font-style-i'>
+                  {Movie.Writers[0]} ⋆ {Movie.Writers[1]} ⋆ {Movie.Writers[2]}
+                  {Movie.Writers[3]}
+                </span>
+              </Col>
+              <div className='border-top'></div>
+            </Row>  */}
+
+// ----------------------
 
 // import "./movie-view.scss";
 // import { Col, Row, Card, Button, Container } from "react-bootstrap";
