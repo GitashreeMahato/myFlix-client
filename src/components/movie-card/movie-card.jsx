@@ -96,18 +96,7 @@ import './movie-card.scss';
               />
             )}
           </span>
-        {/* <Card.Body className="favorite-btns">
-        {!isFavorite ? (
-          <Button className="fav-btn" onClick={addFavoriteMovie}>+</Button>
-        ) : (
-          <Button className="fav-btn" onClick={removeFavoriteMovie}>-</Button>
-        )} */}
-        {/* <Link id='link-style' to={`/movies/${movie._id}`}>
-            <img className='movie-poster' src={movie.imageURL} alt='' />
-          </Link> */}
-      {/* </Card.Body> */}
-
-      </Card.Body>
+        </Card.Body>
     </Card>
 )}
 
@@ -124,19 +113,6 @@ MovieCard.propTypes = {
 export {MovieCard};
 
 
-
-
-// define all the props constraints for the BookCard
-// MovieCard.propTypes = {
-//     movie: PropTypes.shape({
-//         imageURL: PropTypes.string.isRequired,
-//         Title: PropTypes.string.isRequired,
-//         // Directors: PropTypes.string.isRequired,
-//         // Genres: PropTypes.string.isRequired,
-
-    
-//     }).isRequired,
-//   };
 
 
 
@@ -211,6 +187,18 @@ export {MovieCard};
 
 
 // =========================================for my reference ==========================
+//  <Card.Body className="favorite-btns">
+//         {!isFavorite ? (
+//           <Button className="fav-btn" onClick={addFavoriteMovie}>+</Button>
+//         ) : (
+//           <Button className="fav-btn" onClick={removeFavoriteMovie}>-</Button>
+//         )} 
+//          <Link id='link-style' to={`/movies/${movie._id}`}>
+//             <img className='movie-poster' src={movie.imageURL} alt='' />
+//           </Link> 
+//       </Card.Body> 
+
+
 //     <div onClick={() =>{
 //         onMovieClick(movie);
 //     }}>{movie.Title}</div>)
