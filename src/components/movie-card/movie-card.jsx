@@ -2,13 +2,11 @@ import PropTypes from "prop-types";
 import { Button, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import './movie-card.scss';
+import "./movie-card.scss";
+import { API_URL } from "../../config";
 
- const MovieCard = ({ movie, user, token, updatedUser }) => {
-
-  const [isFavorite, setIsFavorite] = useState(
-    false
-  );
+const MovieCard = ({ movie, user, token, updatedUser }) => {
+  const [isFavorite, setIsFavorite] = useState(false);
 
   useEffect(() => {
     if (user.favorite_movies && user.favorite_movies.includes(movie._id)) {
@@ -17,10 +15,10 @@ import './movie-card.scss';
   }, [user]);
 
   const addFavoriteMovie = () => {
-    fetch(
-      `https://user-movies-b3ba594615fa.herokuapp.com/users/${user.username}/movies/${movie._id}`,
-      { method: "POST", headers: { Authorization: `Bearer ${token}` } }
-    )
+    fetch(`${API_URL}/users/${user.username}/movies/${movie._id}`, {
+      method: "POST",
+      headers: { Authorization: `Bearer ${token}` },
+    })
       .then((response) => {
         if (response.ok) {
           return response.json();
@@ -34,13 +32,12 @@ import './movie-card.scss';
           localStorage.setItem("user", JSON.stringify(user));
           updatedUser(user);
           setIsFavorite(true);
-          
         }
       })
       .catch((error) => {
         alert(error);
       });
-      console.log(user);
+    console.log(user);
   };
 
   const removeFavoriteMovie = () => {
@@ -67,47 +64,44 @@ import './movie-card.scss';
         alert(error);
       });
   };
-  
 
-
-   return ( 
-<Card >
+  return (
+    <Card>
       <Card.Img variant="top" src={movie.imageURL} />
       <Card.Body>
         <Card.Title>{movie.Title}</Card.Title>
         <Card.Text>{movie.Description}</Card.Text>
         <Link to={`/movies/${encodeURIComponent(movie._id)}`}>
-        <Button className="close-open-btn">See more</Button>
+          <Button className="close-open-btn">See more</Button>
         </Link>
         <Card.Body className="favorite-btns">
-        {!isFavorite ? (
-          <Button className="fav-btn" onClick={addFavoriteMovie}>+</Button>
-        ) : (
-          <Button className="fav-btn" onClick={removeFavoriteMovie}>-</Button>
-        )}
-        {/* <Link id='link-style' to={`/movies/${movie._id}`}>
+          {!isFavorite ? (
+            <Button className="fav-btn" onClick={addFavoriteMovie}>
+              +
+            </Button>
+          ) : (
+            <Button className="fav-btn" onClick={removeFavoriteMovie}>
+              -
+            </Button>
+          )}
+          {/* <Link id='link-style' to={`/movies/${movie._id}`}>
             <img className='movie-poster' src={movie.imageURL} alt='' />
           </Link> */}
-      </Card.Body>
-
+        </Card.Body>
       </Card.Body>
     </Card>
-)}
-
-
+  );
+};
 
 MovieCard.propTypes = {
-    movie: PropTypes.shape({
-      Title: PropTypes.string.isRequired,
-      imageURL: PropTypes.string.isRequired,
-      Description: PropTypes.string.isRequired,
-    }).isRequired,
-  };
+  movie: PropTypes.shape({
+    Title: PropTypes.string.isRequired,
+    imageURL: PropTypes.string.isRequired,
+    Description: PropTypes.string.isRequired,
+  }).isRequired,
+};
 
-export {MovieCard};
-
-
-
+export { MovieCard };
 
 // define all the props constraints for the BookCard
 // MovieCard.propTypes = {
@@ -117,81 +111,8 @@ export {MovieCard};
 //         // Directors: PropTypes.string.isRequired,
 //         // Genres: PropTypes.string.isRequired,
 
-    
 //     }).isRequired,
 //   };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // =========================================for my reference ==========================
 //     <div onClick={() =>{
@@ -199,11 +120,9 @@ export {MovieCard};
 //     }}>{movie.Title}</div>)
 // };
 
-
-
 // import PropTypes from "prop-types";
 // import { useState } from "react";
-// import { Button, Card } from "react-bootstrap"; 
+// import { Button, Card } from "react-bootstrap";
 // import { Link } from "react-router-dom";
 // // import { BsBookmarkPlusFill, BsBookmarkPlus } from 'react-icons/bs';
 // import Swal from 'sweetalert2';
@@ -301,7 +220,6 @@ export {MovieCard};
 //   //       alert(e);
 //   //     });
 //   // };
-    
 
 //   // useEffect(() => {
 //   //   if (user.favorite_movies && user.favorite_movies.includes(movie._id)) {

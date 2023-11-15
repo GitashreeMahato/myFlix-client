@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { BsFillPersonFill } from 'react-icons/bs';
 import { AiFillLock } from 'react-icons/ai';
 import './login-view.scss';
+import { API_URL } from "../../config";
 
 const LoginView =({user, onLoggedIn })=>{
 
@@ -21,14 +22,14 @@ const LoginView =({user, onLoggedIn })=>{
     const handleSubmit = (event) => {
         // this prevents the default behavior of the form which is to reload the entire page
         event.preventDefault();
-    
+
         const data = {
             username: username,
             password: password,
-            
+
         };
-    
-        fetch("https://user-movies-b3ba594615fa.herokuapp.com/login", {
+
+        fetch( API_URL + "/login", {
           method: "POST",
           headers: {
             "Content-Type": "application/json"
@@ -48,7 +49,7 @@ const LoginView =({user, onLoggedIn })=>{
         .catch((e) => {
           alert("Something went wrong");
         });
-    } 
+    }
     return(
 
        <Form id='box-login' onSubmit={handleSubmit}>
@@ -63,7 +64,7 @@ const LoginView =({user, onLoggedIn })=>{
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           required
-          minLength="3" placeholder="Username" 
+          minLength="3" placeholder="Username"
         />
         {/* <InputGroup.Text id="input-style-login">
         <BsFillPersonFill size={25} className='user-icon' />
@@ -74,7 +75,7 @@ const LoginView =({user, onLoggedIn })=>{
       <Form.Group controlId="formPassword" className='mt-2 col-10' >
         <Form.Label></Form.Label>
         <InputGroup >
-        <Form.Control 
+        <Form.Control
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
@@ -94,19 +95,19 @@ const LoginView =({user, onLoggedIn })=>{
 
       <Row>
             <Col className='mt-5' >
-            
+
               <span className='font-style-new-to'>New to myFlix?</span>{' '}
               <Link to={'/signup'} className='link-style-login font-style'>
                 Signup now
               </Link>
-              
+
             </Col>
           </Row>
 
       </div>
     </Form>
 
-        
+
     );
 };
 
@@ -145,7 +146,7 @@ export {LoginView};
 
 // =====================================
 
-//   <Container fluid onSubmit={handleSubmit}> 
+//   <Container fluid onSubmit={handleSubmit}>
 
     //   <Row className='d-flex justify-content-center align-items-center h-100'>
     //     <Col col='12'>

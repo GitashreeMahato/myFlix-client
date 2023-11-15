@@ -1,12 +1,10 @@
 import { useState } from "react";
 import { Button, Form, Container } from "react-bootstrap";
-import { Link } from 'react-router-dom';
-import { BsFillPersonFill } from 'react-icons/bs';
+import { Link, Navigate } from 'react-router-dom';
 import InputGroup from 'react-bootstrap/InputGroup';
 import { AiFillLock } from 'react-icons/ai';
-import { MdEmail } from 'react-icons/md';
-import { FaBirthdayCake } from 'react-icons/fa';
 import "./signup-view.scss";
+import { API_URL } from "../../config";
 
 const SignupView = ()=>{
     const[username, setUsername] = useState("");
@@ -19,7 +17,7 @@ const SignupView = ()=>{
         event.preventDefault();
 
         // const data = {
-            
+
         //     username : username,
         //     password : password,
         //     email: email,
@@ -41,7 +39,7 @@ const SignupView = ()=>{
             // });
             return;
           }
-        fetch("https://user-movies-b3ba594615fa.herokuapp.com/users",
+        fetch( API_URL + "/users",
         {
             method: "POST",
             body: JSON.stringify(data),
@@ -51,7 +49,8 @@ const SignupView = ()=>{
         }).then((response)=>{
             if(response.ok){
                 alert("Signup successful");
-                window.location.reload();
+                // window.location.reload();
+                <Navigate to="/login" replace />
             }else{
                 alert("Signup failed")
             }
@@ -157,7 +156,7 @@ return (
     </Form>
   );
 };
-  
+
 export {SignupView};
 
 
@@ -214,16 +213,16 @@ export {SignupView};
     //     <Form id='box-signup' onSubmit={handleSubmit}>
     //         <Form.Group controlId= "formUsername" class="col-md-5 mb-3">
     //             <Form.Label>Username:</Form.Label>
-    //             <Form.Control 
+    //             <Form.Control
     //             type="text"
     //             value={username}
-                
+
     //             onChange={(e)=> setUsername(e.target.value)}
     //             required minLength="4" placeholder="Username"/>
     //         </Form.Group>
     //         <Form.Group controlId= "formPassword" class="col-md-5 mb-3">
     //             <Form.Label>Password:</Form.Label>
-    //             <Form.Control 
+    //             <Form.Control
     //             type="text"
     //             value={password}
     //             onChange={(e)=> setPassword(e.target.value)}
@@ -231,7 +230,7 @@ export {SignupView};
     //         </Form.Group>
     //         <Form.Group controlId= "formEmail" class="col-md-5 mb-3">
     //             <Form.Label>Email:</Form.Label>
-    //             <Form.Control 
+    //             <Form.Control
     //             type="email"
     //             value={email}
     //             onChange={(e)=> setEmail(e.target.value)}
@@ -239,14 +238,14 @@ export {SignupView};
     //         </Form.Group>
     //         <Form.Group controlId= "formBirthDate" class="col-md-5 mb-3">
     //             <Form.Label>Date of Birth:</Form.Label>
-    //             <Form.Control 
+    //             <Form.Control
     //             type="date"
     //             value={birth_date}
     //             onChange={(e)=> setBirth_Date(e.target.value)}
     //             />
     //         </Form.Group>
     //         <Button variant="primary" type="submit">Submit</Button>
-    
+
     //         {/* </Form> */}
     //         {/* <label htmlFor="">Username:
     //         <input type="text" value={username} onChange={(e)=>setUsername(e.target.value)} />
