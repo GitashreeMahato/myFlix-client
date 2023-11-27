@@ -1,6 +1,6 @@
 
 .login-backdrop {
-    background-image:linear-gradient(rgba(0, 0, 0, 0.9),rgba(0, 0, 0, 0.6)), url('../images/movie-poster.jpg');
+    background-image: url('../images/myflix-background.png');
     background-repeat: repeat;
     background-size:contain;
     width: 100%;
@@ -41,7 +41,7 @@
     width: 380px;
     height: 420px;
     border-radius: 8px;
-    background: #1c1c1c;
+    background: rgba(0,0,0,.5);;
     overflow: hidden;
 	text-align: center;
     bottom: 20px;
@@ -87,7 +87,7 @@
     position: absolute;
     inset: 2px;
     border-radius: 8px;
-    background: #28292d;
+    background: rgba(0,0,0,.5);;
     z-index: 10;
     padding: 50px 40px;
     display: flex;
@@ -106,7 +106,7 @@
 
 @media (min-width: 575px) {
     .login-backdrop {
-        background-image:linear-gradient(rgba(0, 0, 0, 1),rgba(0, 0, 0, 0.6)), url('../images/movie-poster.jpg');
+        background-image: url('../images/myflix-background.png');
         background-repeat: no-repeat;
         background-size: cover;
         width: 100%;
