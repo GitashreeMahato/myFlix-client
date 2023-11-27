@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { BsBookmarkPlusFill, BsBookmarkPlus } from 'react-icons/bs';
 import './movie-card.scss';
+import { API_URL } from "../../config";
 
  const MovieCard = ({ movie, user, token, updatedUser }) => {
 
@@ -19,7 +20,7 @@ import './movie-card.scss';
 
   const addFavoriteMovie = () => {
     fetch(
-      `https://user-movies-b3ba594615fa.herokuapp.com/users/${user.username}/movies/${movie._id}`,
+      `${API_URL}/users/${user.username}/movies/${movie._id}`,
       { method: "POST", headers: { Authorization: `Bearer ${token}` } }
     )
       .then((response) => {
@@ -46,7 +47,7 @@ import './movie-card.scss';
 
   const removeFavoriteMovie = () => {
     fetch(
-      `https://user-movies-b3ba594615fa.herokuapp.com/users/${user.username}/movies/${movie._id}`,
+      `${API_URL}/users/${user.username}/movies/${movie._id}`,
       { method: "DELETE", headers: { Authorization: `Bearer ${token}` } }
     )
       .then((response) => {
