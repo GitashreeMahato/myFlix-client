@@ -2,7 +2,9 @@ import PropTypes from "prop-types";
 import { Button, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { BsBookmarkPlusFill, BsBookmarkPlus } from 'react-icons/bs';
 import './movie-card.scss';
+import { API_URL } from "../../config";
 
  const MovieCard = ({ movie, user, token, updatedUser }) => {
 
@@ -18,7 +20,7 @@ import './movie-card.scss';
 
   const addFavoriteMovie = () => {
     fetch(
-      `https://user-movies-b3ba594615fa.herokuapp.com/users/${user.username}/movies/${movie._id}`,
+      `${API_URL}/users/${user.username}/movies/${movie._id}`,
       { method: "POST", headers: { Authorization: `Bearer ${token}` } }
     )
       .then((response) => {
@@ -45,7 +47,7 @@ import './movie-card.scss';
 
   const removeFavoriteMovie = () => {
     fetch(
-      `https://user-movies-b3ba594615fa.herokuapp.com/users/${user.username}/movies/${movie._id}`,
+      `${API_URL}/users/${user.username}/movies/${movie._id}`,
       { method: "DELETE", headers: { Authorization: `Bearer ${token}` } }
     )
       .then((response) => {
@@ -75,22 +77,27 @@ import './movie-card.scss';
       <Card.Img variant="top" src={movie.imageURL} />
       <Card.Body>
         <Card.Title>{movie.Title}</Card.Title>
-        <Card.Text>{movie.Description}</Card.Text>
+        {/* <Card.Text>{movie.Description}</Card.Text> */}
         <Link to={`/movies/${encodeURIComponent(movie._id)}`}>
-        <Button className="close-open-btn">See more</Button>
+        <Button className="close-open-btn" variant="light">See more</Button>
         </Link>
-        <Card.Body className="favorite-btns">
-        {!isFavorite ? (
-          <Button className="fav-btn" onClick={addFavoriteMovie}>+</Button>
-        ) : (
-          <Button className="fav-btn" onClick={removeFavoriteMovie}>-</Button>
-        )}
-        {/* <Link id='link-style' to={`/movies/${movie._id}`}>
-            <img className='movie-poster' src={movie.imageURL} alt='' />
-          </Link> */}
-      </Card.Body>
-
-      </Card.Body>
+        <span>
+        {isFavorite ? (
+              <BsBookmarkPlusFill
+                className='full-bookmark move-bookmark'
+                color='#ff6b81'
+                size={40}
+                onClick={removeFavoriteMovie} 
+              />
+            ) : (
+              <BsBookmarkPlus
+                className='outline-bookmark move-bookmark'
+                size={40}
+                onClick={addFavoriteMovie}
+              />
+            )}
+          </span>
+        </Card.Body>
     </Card>
 )}
 
@@ -107,19 +114,6 @@ MovieCard.propTypes = {
 export {MovieCard};
 
 
-
-
-// define all the props constraints for the BookCard
-// MovieCard.propTypes = {
-//     movie: PropTypes.shape({
-//         imageURL: PropTypes.string.isRequired,
-//         Title: PropTypes.string.isRequired,
-//         // Directors: PropTypes.string.isRequired,
-//         // Genres: PropTypes.string.isRequired,
-
-    
-//     }).isRequired,
-//   };
 
 
 
@@ -194,6 +188,18 @@ export {MovieCard};
 
 
 // =========================================for my reference ==========================
+//  <Card.Body className="favorite-btns">
+//         {!isFavorite ? (
+//           <Button className="fav-btn" onClick={addFavoriteMovie}>+</Button>
+//         ) : (
+//           <Button className="fav-btn" onClick={removeFavoriteMovie}>-</Button>
+//         )} 
+//          <Link id='link-style' to={`/movies/${movie._id}`}>
+//             <img className='movie-poster' src={movie.imageURL} alt='' />
+//           </Link> 
+//       </Card.Body> 
+
+
 //     <div onClick={() =>{
 //         onMovieClick(movie);
 //     }}>{movie.Title}</div>)

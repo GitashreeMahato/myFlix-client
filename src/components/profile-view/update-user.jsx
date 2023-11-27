@@ -1,13 +1,14 @@
 import { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import { Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import InputGroup from 'react-bootstrap/InputGroup';
 import { BsFillPersonFill } from 'react-icons/bs';
 import { AiFillLock } from 'react-icons/ai';
 import { MdEmail } from 'react-icons/md';
 import { FaBirthdayCake } from 'react-icons/fa';
 import './update-user.scss';
+import { API_URL } from '../../config';
 import Swal from 'sweetalert2';
 
 export const UpdateUser = ({ user, token, updatedUser }) => {
@@ -38,7 +39,7 @@ export const UpdateUser = ({ user, token, updatedUser }) => {
       birth_date: birth_date
     };
 
-    fetch(`https://user-movies-b3ba594615fa.herokuapp.com/users/${user.username}`, {
+    fetch(`${API_URL}/users/${user.username}`, {
       method: 'PUT',
       body: JSON.stringify(data),
       headers: {
@@ -64,6 +65,7 @@ export const UpdateUser = ({ user, token, updatedUser }) => {
             title: 'Settings updated'
           });
           setTimeout(function () {
+            <Navigate to="/profile" replace  />
             window.location.replace('/users');
           }, 2000);
           updatedUser(user);
@@ -82,7 +84,7 @@ export const UpdateUser = ({ user, token, updatedUser }) => {
     >
       <div id='form-update-user'>
         <h2>Edit Profile</h2>
-        <Form.Group controlId='formNewPassword'>
+        <Form.Group controlId='formNewPassword' className='mt-2 col-10'>
           <Form.Label></Form.Label>
           <InputGroup>
             <Form.Control
@@ -92,12 +94,12 @@ export const UpdateUser = ({ user, token, updatedUser }) => {
               minLength='7'
               placeholder='Username'
             />
-            <InputGroup.Text id='input-style-update-user'>
+            {/* <InputGroup.Text id='input-style-update-user'>
               <BsFillPersonFill size={25} className='user-icon' />
-            </InputGroup.Text>
+            </InputGroup.Text> */}
           </InputGroup>
         </Form.Group>
-        <Form.Group controlId='formPassword'>
+        <Form.Group controlId='formPassword' className='mt-2 col-10'>
           <Form.Label></Form.Label>
           <InputGroup>
             <Form.Control
@@ -105,14 +107,14 @@ export const UpdateUser = ({ user, token, updatedUser }) => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder='Password'
-              minLength='10'
+              minLength='5'
             />
-            <InputGroup.Text id='input-style-update-user'>
+            {/* <InputGroup.Text id='input-style-update-user'>
               <AiFillLock size={25} className='user-icon' />
-            </InputGroup.Text>
+            </InputGroup.Text> */}
           </InputGroup>
         </Form.Group>
-        <Form.Group controlId='formEmail'>
+        <Form.Group controlId='formEmail' className='mt-2 col-10'>
           <Form.Label></Form.Label>
           <InputGroup>
             <Form.Control
@@ -121,12 +123,12 @@ export const UpdateUser = ({ user, token, updatedUser }) => {
               onChange={(e) => setEmail(e.target.value)}
               placeholder='Email'
             />
-            <InputGroup.Text id='input-style-update-user'>
+            {/* <InputGroup.Text id='input-style-update-user'>
               <MdEmail size={25} className='user-icon' />
-            </InputGroup.Text>
+            </InputGroup.Text> */}
           </InputGroup>
         </Form.Group>
-        <Form.Group controlId='formBirthday'>
+        <Form.Group controlId='formBirthday' className='mt-2 col-10'>
           <Form.Label></Form.Label>
           <InputGroup>
             <Form.Control
@@ -135,12 +137,10 @@ export const UpdateUser = ({ user, token, updatedUser }) => {
               onChange={(e) => setBirth_Date(e.target.value)}
               
             />
-            <InputGroup.Text id='input-style-update-user'>
-              <FaBirthdayCake size={25} className='user-icon' />
-            </InputGroup.Text>
+            {/* <InputGroup.  */}
           </InputGroup>
         </Form.Group>
-        <Button className='mt-4 col-9' variant='btn' type='submit'>
+        <Button className='mt-4 col-4' variant='btn btn-light' type='submit'>
           Save
         </Button>
         <Link to={'/profile'} className='link-style-update-user'>
