@@ -3,7 +3,6 @@ import { useState , useEffect} from "react";
  import { MovieCard } from "../movie-card/movie-card";
  import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
-// import {SignUp }}
 import { SignupView } from "../signup-view/signup-view";
 import { NavigationBar } from "../navigation-bar/navigation-bar"; 
 import { ProfileView } from "../profile-view/profile-view";
@@ -12,8 +11,10 @@ import { UpdateUser } from "../profile-view/update-user";
 import { Col, Row, Container} from "react-bootstrap";
 import navLogo from "../images/logo-no-background.svg"
 import { SearchView } from "../search-view/search-view";
-
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { GenreList } from "../genre-list/genre-list";
+import { API_URL } from "../../config";
+
 
 
 
@@ -25,16 +26,16 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
      //state put movies from API into an array
     const [movies, setMovies] = useState([]);
-    const [user, setUser] = useState(storedUser? storedUser:null);
+    const [user, setUser] = useState(storedUser ? storedUser : null);
 
     //keeps track of tokens once a user logs in and stores it in storedToken state
-    const [token, setToken] = useState(storedToken? storedToken:null);
-    const [searchInput] = useState('');
+    const [token, setToken] = useState(storedToken ? storedToken : null);
+    const [searchInput] = useState("");
 
       //updates users state by taking users actions and putting them in setUser and then updating the new information to the users state
   const updatedUser = (user) => {
     setUser(user);
-    localStorage.setItem('user', JSON.stringify(user));
+    localStorage.setItem("user", JSON.stringify(user));
   };
 
   const handleSearch = (search) => {
@@ -45,13 +46,27 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 		setMovies(filteredMovies);
 	};
      //logic to search movies by genre
-  // const comedySearch = movies.filter((movie) => movie.Genres.name === 'Comedy');
-  // const romanceSearch = movies.filter((movie) => movie.Genre.name === 'Romance');
-  // const actionSearch = movies.filter((movie) => movie.Genres.name === 'Action');
-  // const dramaSearch = movies.filter((movie) => movie.Genres.name === 'Drama');
-  // const scifiSearch = movies.filter((movie) => movie.Genres.name === 'Sci-Fi');
-  // const horrorSearch = movies.filter((movie) => movie.Genres.name === 'Horror');
+// const searchByGenre = (movieList, genreName)=>{
+// //   return movieList.filter((movie) =>
+// //   movie.Genres.name.includes(genreName)
+// // );
+// console.log(movieList);
+
+// }
+
   // const thrillerSearch = movies.filter((movie) => movie.Genres.name === 'Thriller');
+  // const actionSearch = movies.filter((movie) => movie.Genres.name === 'Action');
+  // const romanceSearch = movies.filter((movie) => movie.Genres.name === 'Romance');
+  // const scifiSearch = movies.filter((movie) => movie.Genres.name === 'Science Fiction');
+  // const dramaSearch = movies.filter((movie) => movie.Genres.name === 'Drama');
+  // const horrorSearch = movies.filter((movie) => movie.Genres.name === 'Horror');
+  // const historySearch = movies.filter((movie) => movie.Genres.name === 'History');
+  // const fantasySearch = movies.filter((movie) => movie.Genres.name === 'Fantasy');
+  // const mysterySearch = movies.filter((movie) => movie.Genres.name === 'Mystery');
+  // const adventureSearch = movies.filter((movie) => movie.Genres.name === 'Adventure');
+  // const crimeSearch = movies.filter((movie) => movie.Genres.name === 'Crime');
+  // const comedySearch = movies.filter((movie) => movie.Genres.name === 'Comedy');
+  
 
    //checks to see if user has token if not they it should'nt return main-view
     useEffect(()=>{
@@ -60,8 +75,17 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
       }
   
       //fetch for movies data from backend API
-      fetch("https://user-movies-b3ba594615fa.herokuapp.com/movies", {headers:{Authorization: `Bearer ${token}`}})
-      .then((response)=> response.json())
+      fetch( API_URL + "/movies", {headers: {Authorization: `Bearer ${token}`}})
+      .then((response) => {
+        if (!response.ok) {
+          if (response.status === 401) {
+            localStorage.clear();
+            setUser(null);
+            setToken(null);
+          }
+        }
+        return response.json();
+      })
       .then((data)=>{
         console.log("Movies from API :" , data);
         const movieFromApi = data.map((movie)=>{
@@ -75,7 +99,7 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
             Actors: movie.Actors,
             Release_Date: movie.Release_Date,
             Ratings: movie.Ratings,
-            Featured: movie.Featured.toString(),
+            Featured: movie.Featured,
 
             // Genres: {
             //   name: movie.Genres.name
@@ -88,12 +112,11 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
         });
         setMovies(movieFromApi);
         
-      })
+      });
       
     }, [token]);
     
     return(
-
     <BrowserRouter>
     {!user ? (
         <Container>
@@ -196,12 +219,12 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
 
 <Route
-              path='/profile'
+              path="/profile"
               element={
                 <>
                   {user ? (
                     <Col>
-                      <h2 className='movie-featured-heading mt-2 font-style-bold'>
+                      <h2 className="movie-featured-heading mt-2 font-style-bold">
                         {user.username} s' profile
                       </h2>
                       <ProfileView
@@ -217,19 +240,19 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
                       />
                     </Col>
                   ) : (
-                    <Navigate to='/login' replace />
+                    <Navigate to="/login" replace />
                   )}
                 </>
               }
             />
 
       <Route
-              path='/users/:username'
+              path="/users/:username"
               element={
                 <>
                   {user ? (
                     <Col>
-                      <Navigate to='/users/updateInfo' />
+                      <Navigate to="/users/updateInfo" />
                       <UpdateUser
                         user={user}
                         token={token}
@@ -237,20 +260,42 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
                       />
                     </Col>
                   ) : (
-                    <Navigate to='/login' replace />
+                    <Navigate to="/login" replace />
                   )}
                 </>
               }
             />
 
-<Route
-              path='/myList/favorites'
+    <Route
+            path="/movies/genre/:genreName"
+            element= {
+              <>
+              {!user ? (
+              <Navigate to="/login" replace />
+              ) : movies.length === 0 ? (
+              <Col>This list is empty!</Col>
+              ) : (
+              <Col>
+              <GenreList
+                        user={user}
+                        token={token}
+                        movies={movies}
+                        updatedUser={updatedUser} 
+                        />
+              </Col>
+               )}
+              </>
+            }
+            />
+
+        <Route
+              path="/myList/favorites"
               element={
                 <>
                   {user ? (
                     <Row>
                       <Col>
-                        <h2 className='movie-featured-heading mt-2 font-style-bold'>
+                        <h2 className="movie-featured-heading mt-2 font-style-bold">
                           MyList Movies
                         </h2>
                         <MyList
@@ -259,27 +304,23 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
                           movie={movies}
                           updatedUser={updatedUser}
                         />
-                       
+
                       </Col>
                     </Row>
                   ) : (
-                    <Navigate to='/login' replace />
+                    <Navigate to="/login" replace />
                   )}
                 </>
               }
-            />
-
+            />  
         </Routes>
         </Row>
         </Container>
         </BrowserRouter>
-
-
-              
-                )
-              };
+      )
+     };
    
-  export {MainView};
+  export { MainView };
 
 
 
@@ -512,52 +553,6 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
           </>
       )
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
   ============================ For my reference ====================================

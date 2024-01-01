@@ -1,14 +1,22 @@
-import { useState } from "react";
-import { Button, Form, Container } from "react-bootstrap";
-import { Link } from 'react-router-dom';
-import { BsFillPersonFill } from 'react-icons/bs';
+import { useState, useEffect } from "react";
+import { Button, Form, Container, Row, Col } from "react-bootstrap";
+import { Link, Navigate } from 'react-router-dom';
+// import { BsFillPersonFill } from 'react-icons/bs';
 import InputGroup from 'react-bootstrap/InputGroup';
 import { AiFillLock } from 'react-icons/ai';
-import { MdEmail } from 'react-icons/md';
-import { FaBirthdayCake } from 'react-icons/fa';
+// import { MdEmail } from 'react-icons/md';
+// import { FaBirthdayCake } from 'react-icons/fa';
 import "./signup-view.scss";
+import { API_URL } from "../../config";
 
-const SignupView = ()=>{
+const SignupView = ({ user })=>{
+  useEffect(() => {
+    if (!user) {
+      document.body.classList.add('signup-backdrop');
+    } else {
+      document.body.classList.remove('signup-backdrop');
+    }
+  });
     const[username, setUsername] = useState("");
     const[password, setPassword] = useState("");
     const[email, setEmail] = useState("");
@@ -41,7 +49,7 @@ const SignupView = ()=>{
             // });
             return;
           }
-        fetch("https://user-movies-b3ba594615fa.herokuapp.com/users",
+        fetch(API_URL + "/users",
         {
             method: "POST",
             body: JSON.stringify(data),
@@ -51,7 +59,8 @@ const SignupView = ()=>{
         }).then((response)=>{
             if(response.ok){
                 alert("Signup successful");
-                window.location.reload();
+                // window.location.reload();
+                <Navigate to="/login" replace />
             }else{
                 alert("Signup failed")
             }
@@ -72,7 +81,7 @@ return (
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 required
-                minLength='5'
+                minLength='10'
                 placeholder='Username'
               />
                 {/* <InputGroup.Text id='input-style-signup'>
@@ -91,10 +100,11 @@ return (
                 minLength='10'
                 placeholder='Password'
               />
-              <InputGroup.Text id='input-style-signup'>
+              </InputGroup>
+              {/* <InputGroup.Text id='input-style-signup'>
                 <AiFillLock size={25} className='user-icon' />
-              </InputGroup.Text>
-              <Form.Group controlId='formControlPassword'>
+              </InputGroup.Text> */}
+              <Form.Group controlId='formControlPassword' >
                 <Form.Label></Form.Label>
                 <InputGroup>
                   <Form.Control
@@ -104,12 +114,12 @@ return (
                     placeholder='Confirm Password'
                     minLength='10'
                   />
-                  <InputGroup.Text id='input-style-update-user'>
+                  {/* <InputGroup.Text id='input-style-update-user'>
                     <AiFillLock size={25} className='user-icon' />
-                  </InputGroup.Text>
+                  </InputGroup.Text> */}
                 </InputGroup>
               </Form.Group>
-            </InputGroup>
+            
           </Form.Group>
           <Form.Group controlId='formEmail'>
             <Form.Label></Form.Label>
@@ -143,14 +153,16 @@ return (
           </Form.Group>
 
           <Button
-            className='p-1 mt-4 col-10 font-style'
+            className='p-1 mt-4 col-8 font-style' 
+            style={{marginLeft: "42px"}}          
             variant='btn btn-danger'
             type='submit'
           >
             Get Started
           </Button>
         </Container>
-        <Link to={'/login'} className='link-style-signup font-style mt-3'>
+          <Link to={'/login'} className='link-style-signup font-style mt-3'
+          >
           Already a member?
         </Link>
       </div>

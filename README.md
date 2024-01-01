@@ -58,7 +58,7 @@ _Profile View_
 
 ### Live Demo <a name="live-demo"></a>
 
-- [Live Demo Link - cooming soon](https://)
+- [Live Demo Link](https://gomyflix.netlify.app)
 
  ### Repository link
 
