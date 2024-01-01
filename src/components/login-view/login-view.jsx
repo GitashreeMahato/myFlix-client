@@ -2,9 +2,10 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { Col, Row, Card, Button, Container, InputGroup, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { BsFillPersonFill } from 'react-icons/bs';
-import { AiFillLock } from 'react-icons/ai';
+// import { BsFillPersonFill } from 'react-icons/bs';
+// import { AiFillLock } from 'react-icons/ai';
 import './login-view.scss';
+import { API_URL } from "../../config";
 
 const LoginView =({user, onLoggedIn })=>{
 
@@ -28,7 +29,7 @@ const LoginView =({user, onLoggedIn })=>{
             
         };
     
-        fetch("https://user-movies-b3ba594615fa.herokuapp.com/login", {
+        fetch( API_URL + "/login", {
           method: "POST",
           headers: {
             "Content-Type": "application/json"
